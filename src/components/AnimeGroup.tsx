@@ -43,7 +43,7 @@ const AnimeGroup = (props: { url: string }) => {
       }
     };
     fetchData();
-  }, []);
+  });
 
   console.log(data.length);
   return loading ? (
@@ -56,7 +56,7 @@ const AnimeGroup = (props: { url: string }) => {
         <AnimeCard
           image={datum.image}
           name={datum.name}
-          rating={datum.rating}
+          rating={datum.rating ? datum.rating : "Not yet rated"}
         ></AnimeCard>
       ))}
     </div>
