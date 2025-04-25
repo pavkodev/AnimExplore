@@ -29,9 +29,11 @@ const HeaderComponent = () => {
           id="in-search"
         />
         <div className="mt-1 flex w-fit justify-around rounded">
-          <button className="rounded bg-slate-900 p-2 px-20">TV Shows</button>
+          <button className="w-[45vw] rounded bg-slate-900 p-2">
+            TV Shows
+          </button>
           <div className="border-1"></div>
-          <button className="rounded bg-slate-900 p-2 px-20">Film</button>
+          <button className="w-[45vw] rounded bg-slate-900 p-2">Film</button>
         </div>
       </div>
     </header>
