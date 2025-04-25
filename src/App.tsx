@@ -1,9 +1,12 @@
 import "./App.css";
+import AnimeGroup from "./components/AnimeGroup";
+import HeaderComponent from "./components/HeaderComponent";
 
 function App() {
   return (
     <>
-      <div className="bg-red-400">Hello World!</div>
+      <HeaderComponent />
+      <AnimeGroup url="https://api.jikan.moe/v4/top/anime" />
     </>
   );
 }
