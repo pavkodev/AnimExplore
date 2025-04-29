@@ -1,10 +1,8 @@
 import "./App.css";
-import AnimeGroup from "./components/AnimeGroup";
 import FilmTvToggle from "./components/FilmTvToggle";
 import GenreInfo from "./components/GenreInfo";
 import HeaderComponent from "./components/HeaderComponent";
 import HeadingComponent from "./components/HeadingComponent";
-import HeroAnimeCard from "./components/HeroAnimeCard";
 import HeroGroup from "./components/HeroGroup";
 
 function App() {
@@ -16,10 +14,10 @@ function App() {
       <GenreInfo />
       <HeadingComponent heading={"New Season Releases"} />
       <HeroGroup url={"https://api.jikan.moe/v4/seasons/now"} />
-      <HeadingComponent heading={"Top Anime"} />
+      {/* <HeadingComponent heading={"Top Anime"} />
       <AnimeGroup url="https://api.jikan.moe/v4/top/anime" />
       <HeadingComponent heading={"Upcoming Anime"} />
-      <AnimeGroup url="https://api.jikan.moe/v4/seasons/upcoming" />
+      <AnimeGroup url="https://api.jikan.moe/v4/seasons/upcoming" /> */}
     </>
   );
 }

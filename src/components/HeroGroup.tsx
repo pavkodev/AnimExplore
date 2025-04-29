@@ -20,29 +20,48 @@ const HeroGroup = (props: { url: string }) => {
           );
         }
         const json = await response.json();
-        json.data.forEach((datum) => {
-          const studios: string[] = datum.studios.map((studio) => studio.name);
-          const genres: string[] = datum.genres.map((genre) => genre.name);
-          setData((data) => [
-            ...data,
-            {
-              image: datum.images.webp.large_image_url,
-              title: datum.titles[0].title,
-              titleEnglish: datum.titles[0].title,
-              studios: studios,
-              type: datum.type,
-              genres: genres,
-              trailer: datum.trailer.url,
-              synopsis: datum.synopsis,
-            },
-          ]);
-        });
+        json.data.forEach(
+          (datum: {
+            studios: { name: string }[];
+            genres: { name: string }[];
+            images: { webp: { large_image_url: string } };
+            titles: { title: string }[];
+            type: string;
+            trailer: { url: string };
+            synopsis: string;
+          }) => {
+            const studios: string[] = datum.studios.map(
+              (studio: { name: string }) => studio.name,
+            );
+            const genres: string[] = datum.genres.map(
+              (genre: { name: string }) => genre.name,
+            );
+            setData((data) => [
+              ...data,
+              {
+                image: datum.images.webp.large_image_url,
+                title: datum.titles[0].title,
+                titleEnglish: datum.titles[0].title,
+                studios: studios,
+                type: datum.type,
+                genres: genres,
+                trailer: datum.trailer.url,
+                synopsis: datum.synopsis,
+              },
+            ]);
+          },
+        );
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
   }, []);
+
+  if (loading) {
+    return <p className="text-white">Loading...</p>;
+  }
 
   return (
     <div className="m-2 grid grid-flow-col gap-3 overflow-scroll">
