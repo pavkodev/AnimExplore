@@ -51,13 +51,13 @@ const AnimeGroup = (props: { url: string }) => {
   ) : !data ? (
     <p className="p-4 text-white">Cannot reach database.</p>
   ) : (
-    <div className="align-items-stretch m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll">
+    <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll">
       {data.map((datum) => (
         <AnimeCard
           image={datum.image}
           name={datum.name}
           rating={datum.rating ? datum.rating : "Not yet rated"}
-        ></AnimeCard>
+        />
       ))}
     </div>
   );

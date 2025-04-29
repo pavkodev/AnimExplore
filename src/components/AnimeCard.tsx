@@ -2,6 +2,7 @@ const AnimeCard = (props: { image: string; name: string; rating: string }) => {
   return (
     <div className="m-2 flex w-xs flex-col items-center justify-between rounded border-2 border-slate-800 bg-slate-700 p-2 text-center text-white">
       <img
+        loading="lazy"
         src={props.image}
         alt={"Cover of " + props.name}
         className="h-80 rounded"
