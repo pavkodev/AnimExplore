@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { HeroInfo } from "../types/types";
 import HeroAnimeCard from "./HeroAnimeCard";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const HeroGroup = (props: { url: string }) => {
   const [data, setData] = useState<HeroInfo[]>([]);
   const [loading, setLoading] = useState(true);
-  let childIndex = 0;
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ stopOnInteraction: false }),
+  ]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +54,7 @@ const HeroGroup = (props: { url: string }) => {
               {
                 image: datum.images.webp.large_image_url,
                 title: datum.titles[0].title,
-                titleEnglish: datum.titles[0].title,
+                altTitle: datum.titles[1].title,
                 studios: studios,
                 type: datum.type,
                 genres: genres,
@@ -64,20 +77,49 @@ const HeroGroup = (props: { url: string }) => {
   }
 
   return (
-    <div className="m-2 grid grid-flow-col gap-3 overflow-scroll">
-      {data.map((datum) => (
-        <HeroAnimeCard
-          key={childIndex++}
-          image={datum.image}
-          title={datum.title}
-          titleEnglish={datum.titleEnglish}
-          studios={datum.studios}
-          type={datum.type}
-          genres={datum.genres}
-          trailer={datum.trailer}
-          synopsis={datum.synopsis}
-        />
-      ))}
+    <div className="embla relative" ref={emblaRef}>
+      {/* <div className="m-2 grid snap-x snap-proximity grid-flow-col gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800"> */}
+      {/* 1/4 of HeroAnimeCard width to offset first element in carousel */}
+      <div className="embla__container">
+        {data.map((datum, index) => (
+          <HeroAnimeCard
+            key={index}
+            image={datum.image}
+            title={datum.title}
+            altTitle={datum.altTitle}
+            studios={datum.studios}
+            type={datum.type}
+            genres={datum.genres}
+            trailer={datum.trailer}
+            synopsis={datum.synopsis}
+          />
+        ))}
+      </div>
+      <button
+        className="embla__prev absolute top-[50%] left-0"
+        onClick={scrollPrev}
+      >
+        <svg
+          className="ml-2 h-10 w-10 cursor-pointer fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+        >
+          <path d="m480-320 56-56-64-64h168v-80H472l64-64-56-56-160 160 160 160Zm0 240q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+        </svg>
+      </button>
+      <button
+        className="embla__next absolute top-[50%] right-0 mr-2 cursor-pointer"
+        onClick={scrollNext}
+      >
+        <svg
+          className="h-10 w-10 fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+        >
+          <path d="m480-320 160-160-160-160-56 56 64 64H320v80h168l-64 64 56 56Zm0 240q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z" />
+        </svg>
+      </button>
+      {/* </div> */}
     </div>
   );
 };

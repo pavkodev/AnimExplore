@@ -1,9 +1,6 @@
 import { useState } from "react";
+import { GenreSummary } from "../types/types";
 const GenreInfo = () => {
-  type GenreSummary = {
-    name: string;
-    description: string;
-  };
   const summaries: GenreSummary[] = [
     {
       name: "Shonen",
@@ -171,7 +168,7 @@ const GenreInfo = () => {
   <p>{genres.toString()}</p>;
   return (
     <div className="m-1 rounded shadow-2xs shadow-orange-500/50">
-      <ul className="flex overflow-scroll bg-slate-900 text-nowrap text-white">
+      <ul className="flex overflow-scroll overflow-y-hidden bg-slate-900 text-nowrap text-white [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
         {genres.map((genre, index) => (
           <>
             <li

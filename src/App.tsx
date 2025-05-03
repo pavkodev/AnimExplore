@@ -13,7 +13,7 @@ function App() {
       <HeadingComponent heading={"Genre Information"} />
       <GenreInfo />
       <HeadingComponent heading={"New Season Releases"} />
-      <HeroGroup url={"https://api.jikan.moe/v4/seasons/now"} />
+      <HeroGroup url={"/src/assets/now.json"} />
       {/* <HeadingComponent heading={"Top Anime"} />
       <AnimeGroup url="https://api.jikan.moe/v4/top/anime" />
       <HeadingComponent heading={"Upcoming Anime"} />
