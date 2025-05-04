@@ -51,7 +51,7 @@ const AnimeGroup = (props: { url: string }) => {
   ) : !data ? (
     <p className="p-4 text-white">Cannot reach database.</p>
   ) : (
-    <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll">
+    <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
       {data.map((datum) => (
         <AnimeCard
           image={datum.image}
