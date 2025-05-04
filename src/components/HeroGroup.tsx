@@ -38,7 +38,9 @@ const HeroGroup = (props: { url: string }) => {
             studios: { name: string }[];
             genres: { name: string }[];
             images: { webp: { large_image_url: string } };
-            titles: { title: string }[];
+            title: string;
+            title_english: string | null;
+            title_synonyms: string[];
             type: string;
             trailer: { url: string };
             synopsis: string;
@@ -49,12 +51,22 @@ const HeroGroup = (props: { url: string }) => {
             const genres: string[] = datum.genres.map(
               (genre: { name: string }) => genre.name,
             );
+
+            let altTitle: string;
+            if (datum.title_english && datum.title_english !== datum.title) {
+              altTitle = datum.title_english;
+            } else if (datum.title_synonyms.length > 0) {
+              altTitle = datum.title_synonyms[0];
+            } else {
+              altTitle = "";
+            }
+
             setData((data) => [
               ...data,
               {
                 image: datum.images.webp.large_image_url,
-                title: datum.titles[0].title,
-                altTitle: datum.titles[1].title,
+                title: datum.title,
+                altTitle: altTitle,
                 studios: studios,
                 type: datum.type,
                 genres: genres,
