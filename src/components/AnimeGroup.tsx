@@ -21,7 +21,20 @@ const AnimeGroup = (props: { url: string }) => {
           throw new Error("ERROR FETCHING URL");
         }
         const json = await response.json();
-        json.data.forEach(
+        const jsonNoDuplicates = json.data.filter(
+          (
+            item: { title: string; synopsis: string },
+            index: number,
+            originalJson: [{ title: string; synopsis: string }],
+          ) =>
+            index ===
+            originalJson.findIndex(
+              (originalItem) =>
+                originalItem.title === item.title &&
+                originalItem.synopsis === item.synopsis,
+            ),
+        );
+        jsonNoDuplicates.forEach(
           (datum: {
             images: { webp: { image_url: string } };
             title: string;
@@ -43,7 +56,7 @@ const AnimeGroup = (props: { url: string }) => {
       }
     };
     fetchData();
-  });
+  }, []);
 
   console.log(data.length);
   return loading ? (

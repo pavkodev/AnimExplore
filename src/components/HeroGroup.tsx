@@ -33,7 +33,23 @@ const HeroGroup = (props: { url: string }) => {
           );
         }
         const json = await response.json();
-        json.data.forEach(
+
+        //Code taken from https://stackoverflow.com/questions/23507853/remove-duplicate-objects-from-json-array Credit: Aarchie
+        const jsonNoDuplicates = json.data.filter(
+          (
+            item: { title: string; synopsis: string },
+            index: number,
+            originalJson: [{ title: string; synopsis: string }],
+          ) =>
+            index ===
+            originalJson.findIndex(
+              (originalItem) =>
+                originalItem.title === item.title &&
+                originalItem.synopsis === item.synopsis,
+            ),
+        );
+
+        jsonNoDuplicates.forEach(
           (datum: {
             studios: { name: string }[];
             genres: { name: string }[];

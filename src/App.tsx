@@ -16,9 +16,9 @@ function App() {
       <HeadingComponent heading={"New Season Releases"} />
       <HeroGroup url={"/src/assets/now.json"} />
       <HeadingComponent heading={"Top Anime"} />
-      <AnimeGroup url="https://api.jikan.moe/v4/top/anime" />
+      <AnimeGroup url="/src/assets/top.json" />
       <HeadingComponent heading={"Upcoming Anime"} />
-      <AnimeGroup url="https://api.jikan.moe/v4/seasons/upcoming" />
+      <AnimeGroup url="/src/assets/upcoming.json" />
     </>
   );
 }

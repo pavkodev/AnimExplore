@@ -1,5 +1,7 @@
 #JSON for testing API responses
 now.json
+top.json
+upcoming.json
 
 # Logs
 logs
