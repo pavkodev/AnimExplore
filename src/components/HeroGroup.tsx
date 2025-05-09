@@ -6,7 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const HeroGroup = (props: { url: string }) => {
   const [data, setData] = useState<HeroInfo[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ stopOnInteraction: false }),
@@ -21,6 +21,7 @@ const HeroGroup = (props: { url: string }) => {
   }, [emblaApi]);
 
   useEffect(() => {
+    setData([]);
     const fetchData = async () => {
       const url = props.url;
 
@@ -98,7 +99,7 @@ const HeroGroup = (props: { url: string }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [props.url]);
 
   if (loading) {
     return <p className="text-white">Loading...</p>;
@@ -108,17 +109,7 @@ const HeroGroup = (props: { url: string }) => {
     <div className="embla relative" ref={emblaRef}>
       <div className="embla__container">
         {data.map((datum, index) => (
-          <HeroAnimeCard
-            key={index}
-            image={datum.image}
-            title={datum.title}
-            altTitle={datum.altTitle}
-            studios={datum.studios}
-            type={datum.type}
-            genres={datum.genres}
-            trailer={datum.trailer}
-            synopsis={datum.synopsis}
-          />
+          <HeroAnimeCard key={index} {...datum} />
         ))}
       </div>
       <button
