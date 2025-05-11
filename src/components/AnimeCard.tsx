@@ -1,18 +1,23 @@
-const AnimeCard = (props: { image: string; name: string; rating: string }) => {
+const AnimeCard = (props: { image: string; title: string; rating: string }) => {
   return (
-    <div className="m-2 flex w-xs flex-col items-center justify-between rounded border-2 border-slate-800 bg-slate-700 p-2 text-center text-white">
+    <div className="m-2 flex w-2xs flex-col items-center justify-between rounded border-2 border-slate-800 bg-slate-700 p-2 text-center text-white sm:w-xs">
       <img
         loading="lazy"
         src={props.image}
-        alt={"Cover of " + props.name}
+        alt={"Cover of " + props.title}
         className="h-80 rounded"
       />
-      <h1 className="pt-2 font-semibold text-white">{props.name}</h1>
+      <h1
+        className="line-clamp-2 pt-2 font-semibold text-white"
+        title={props.title}
+      >
+        {props.title}
+      </h1>
       <p className="font-thin">Rating: {props.rating}</p>
       <div className="mt-2 flex w-full justify-around">
         <button className="flex cursor-pointer items-center justify-center rounded p-2 transition-all hover:bg-slate-800 active:translate-y-0.5">
           <svg
-            className="mr-1 h-5 w-5 fill-white align-middle"
+            className="h-10 w-10 fill-white sm:h-6 sm:w-6 sm:pr-1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
           >
@@ -21,9 +26,9 @@ const AnimeCard = (props: { image: string; name: string; rating: string }) => {
           Learn more
         </button>
         <div className="border-1"></div>
-        <button className="flex cursor-pointer items-center rounded p-2 align-middle transition-all hover:bg-slate-800 active:translate-y-0.5">
+        <button className="flex cursor-pointer items-center justify-center rounded p-2 transition-all hover:bg-slate-800 active:translate-y-0.5">
           <svg
-            className="mr-1 h-5 w-5 fill-white"
+            className="h-10 w-10 fill-white sm:h-6 sm:w-6 sm:pr-1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
           >

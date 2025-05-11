@@ -16,7 +16,9 @@ const HeroAnimeCard = (props: {
         className="self-stretch rounded mask-b-from-0 lg:mask-r-from-0 lg:mask-b-from-100%"
       />
       <div className="flex flex-1 flex-col items-center justify-center text-center lg:my-4 lg:ml-8 lg:w-[50ch]">
-        <h2 className="mb-2 line-clamp-3 text-xl font-bold">{props.title}</h2>
+        <h2 className="mb-2 line-clamp-3 text-xl font-bold" title={props.title}>
+          {props.title}
+        </h2>
         <h3 className="text-md mb-4 line-clamp-3 hidden font-semibold sm:block lg:mb-0">
           {props.altTitle}
         </h3>

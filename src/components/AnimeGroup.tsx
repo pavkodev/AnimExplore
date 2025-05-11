@@ -4,7 +4,7 @@ import AnimeCard from "./AnimeCard";
 const AnimeGroup = (props: { url: string }) => {
   type AnimeCardInfo = {
     image: string;
-    name: string;
+    title: string;
     rating: string;
   };
 
@@ -45,7 +45,7 @@ const AnimeGroup = (props: { url: string }) => {
               ...data,
               {
                 image: datum.images.webp.image_url,
-                name: datum.title,
+                title: datum.title,
                 rating: datum.score,
               },
             ]);
@@ -69,7 +69,7 @@ const AnimeGroup = (props: { url: string }) => {
         <AnimeCard
           key={index}
           image={datum.image}
-          name={datum.name}
+          title={datum.title}
           rating={datum.rating ? datum.rating : "Not yet rated."}
         />
       ))}
