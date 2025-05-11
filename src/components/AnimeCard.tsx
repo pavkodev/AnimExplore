@@ -10,7 +10,7 @@ const AnimeCard = (props: { image: string; name: string; rating: string }) => {
       <h1 className="pt-2 font-semibold text-white">{props.name}</h1>
       <p className="font-thin">Rating: {props.rating}</p>
       <div className="mt-2 flex w-full justify-around">
-        <button className="flex cursor-pointer items-center justify-center">
+        <button className="flex cursor-pointer items-center justify-center rounded p-2 transition-all hover:bg-slate-800 active:translate-y-0.5">
           <svg
             className="mr-1 h-5 w-5 fill-white align-middle"
             xmlns="http://www.w3.org/2000/svg"
@@ -21,15 +21,15 @@ const AnimeCard = (props: { image: string; name: string; rating: string }) => {
           Learn more
         </button>
         <div className="border-1"></div>
-        <button className="flex cursor-pointer items-center align-middle">
+        <button className="flex cursor-pointer items-center rounded p-2 align-middle transition-all hover:bg-slate-800 active:translate-y-0.5">
           <svg
             className="mr-1 h-5 w-5 fill-white"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
           >
-            <path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z" />
+            <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
           </svg>
-          Favourite
+          Add to watchlist
         </button>
       </div>
     </div>
