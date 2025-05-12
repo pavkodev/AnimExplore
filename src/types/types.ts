@@ -3,9 +3,19 @@ export type GenreSummary = {
   name: string;
   description: string;
 };
+//Anime card types
+export type AnimeCardInfo = {
+  id: number;
+  url: string;
+  image: string;
+  title: string;
+  rating: string;
+};
 
 //Hero anime card types
 export type HeroInfo = {
+  id: number;
+  url: string;
   image: string;
   title: string;
   altTitle: string;

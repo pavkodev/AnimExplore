@@ -17,7 +17,14 @@ const SeasonExplorer = () => {
   return (
     <>
       <SeasonForm seasonGetter={getSeason} yearGetter={getYear} />
-      <AnimeGroup url={`https://api.jikan.moe/v4/seasons/${year}/${season}`} />;
+      {season && year === -1 ? (
+        <p>Loading...</p>
+      ) : (
+        <AnimeGroup
+          url={`https://api.jikan.moe/v4/seasons/${year}/${season}`}
+        />
+      )}
+      ;
     </>
   );
 };

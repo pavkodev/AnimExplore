@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import AnimeCard from "./AnimeCard";
+import { AnimeCardInfo } from "../types/types";
 
 const AnimeGroup = (props: { url: string }) => {
-  type AnimeCardInfo = {
-    image: string;
-    title: string;
-    rating: string;
-  };
-
   const [data, setData] = useState<AnimeCardInfo[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,6 +32,8 @@ const AnimeGroup = (props: { url: string }) => {
         );
         jsonNoDuplicates.forEach(
           (datum: {
+            mal_id: number;
+            url: string;
             images: { webp: { image_url: string } };
             title: string;
             score: string;
@@ -44,6 +41,8 @@ const AnimeGroup = (props: { url: string }) => {
             setData((data) => [
               ...data,
               {
+                id: datum.mal_id,
+                url: datum.url,
                 image: datum.images.webp.image_url,
                 title: datum.title,
                 rating: datum.score,
@@ -68,6 +67,8 @@ const AnimeGroup = (props: { url: string }) => {
       {data.map((datum, index) => (
         <AnimeCard
           key={index}
+          id={datum.id}
+          url={datum.url}
           image={datum.image}
           title={datum.title}
           rating={datum.rating ? datum.rating : "Not yet rated."}

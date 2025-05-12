@@ -1,4 +1,6 @@
 const HeroAnimeCard = (props: {
+  id: number;
+  url: string;
   image: string;
   title: string;
   altTitle: string;
@@ -45,6 +47,9 @@ const HeroAnimeCard = (props: {
           </button>
         </a>
         <p className="hidden lg:line-clamp-15">{props.synopsis}</p>
+        <a href={props.url} className="inline text-orange-400 underline">
+          Learn more...
+        </a>
       </div>
     </div>
   );

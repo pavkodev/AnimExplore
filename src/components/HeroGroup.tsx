@@ -52,6 +52,8 @@ const HeroGroup = (props: { url: string }) => {
 
         jsonNoDuplicates.forEach(
           (datum: {
+            mal_id: number;
+            url: string;
             studios: { name: string }[];
             genres: { name: string }[];
             images: { webp: { large_image_url: string } };
@@ -81,6 +83,8 @@ const HeroGroup = (props: { url: string }) => {
             setData((data) => [
               ...data,
               {
+                id: datum.mal_id,
+                url: datum.url,
                 image: datum.images.webp.large_image_url,
                 title: datum.title,
                 altTitle: altTitle,
