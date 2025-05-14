@@ -6,10 +6,15 @@ import HeaderComponent from "./components/HeaderComponent";
 import HeadingComponent from "./components/HeadingComponent";
 import HeroGroup from "./components/HeroGroup";
 import SeasonExplorer from "./components/SeasonExplorer";
+import useWatchlist from "./hooks/useWatchlist";
+import { WatchlistContext } from "./contexts/WatchlistContext";
 
 function App() {
+  const [watchlist, setWatchlist] = useWatchlist();
+  const value = { watchlist, setWatchlist };
+
   return (
-    <>
+    <WatchlistContext.Provider value={value}>
       <HeaderComponent />
       <FilmTvToggle />
       <HeadingComponent heading={"Genre Information"} />
@@ -22,7 +27,7 @@ function App() {
       <AnimeGroup url="/src/assets/data/upcoming.json" />
       <HeadingComponent heading={"Explore Seasons"} />
       <SeasonExplorer />
-    </>
+    </WatchlistContext.Provider>
   );
 }
 
