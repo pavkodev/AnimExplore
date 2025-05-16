@@ -37,6 +37,7 @@ const AnimeGroup = (props: { url: string }) => {
             images: { webp: { image_url: string } };
             title: string;
             score: string;
+            aired: { string: string };
           }) => {
             setData((data) => [
               ...data,
@@ -46,6 +47,7 @@ const AnimeGroup = (props: { url: string }) => {
                 image: datum.images.webp.image_url,
                 title: datum.title,
                 rating: datum.score,
+                aired: datum.aired.string,
               },
             ]);
           },
@@ -71,7 +73,8 @@ const AnimeGroup = (props: { url: string }) => {
           url={datum.url}
           image={datum.image}
           title={datum.title}
-          rating={datum.rating ? datum.rating : "Not yet rated."}
+          rating={datum.rating}
+          aired={datum.aired}
         />
       ))}
     </div>

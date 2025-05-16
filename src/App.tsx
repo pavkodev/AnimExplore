@@ -8,6 +8,7 @@ import HeroGroup from "./components/HeroGroup";
 import SeasonExplorer from "./components/SeasonExplorer";
 import useWatchlist from "./hooks/useWatchlist";
 import { WatchlistContext } from "./contexts/WatchlistContext";
+import Watchlist from "./components/Watchlist";
 
 function App() {
   const [watchlist, setWatchlist] = useWatchlist();
@@ -21,12 +22,13 @@ function App() {
       <GenreInfo />
       <HeadingComponent heading={"New Season Releases"} />
       <HeroGroup url={"/src/assets/data/now.json"} />
-      <HeadingComponent heading={"Top Anime"} />
-      <AnimeGroup url="/src/assets/data/top.json" />
       <HeadingComponent heading={"Upcoming Anime"} />
       <AnimeGroup url="/src/assets/data/upcoming.json" />
-      <HeadingComponent heading={"Explore Seasons"} />
-      <SeasonExplorer />
+      <HeadingComponent heading={"Top Anime"} />
+      <AnimeGroup url="/src/assets/data/top.json" />
+      {/* <HeadingComponent heading={"Explore Seasons"} />
+      <SeasonExplorer /> */}
+      <Watchlist />
     </WatchlistContext.Provider>
   );
 }

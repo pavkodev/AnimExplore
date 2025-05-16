@@ -1,7 +1,5 @@
 #JSON for testing API responses
-now.json
-top.json
-upcoming.json
+src/assets/data/*.json
 
 # Logs
 logs

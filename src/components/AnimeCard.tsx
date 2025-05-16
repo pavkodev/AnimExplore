@@ -1,14 +1,10 @@
 import { useContext } from "react";
 import { WatchlistContext } from "../contexts/WatchlistContext";
+import { AnimeCardInfo } from "../types/types";
 
-const AnimeCard = (props: {
-  id: number;
-  url: string;
-  image: string;
-  title: string;
-  rating: string;
-}) => {
+const AnimeCard = (props: AnimeCardInfo) => {
   const { watchlist, setWatchlist } = useContext(WatchlistContext);
+  const inWatchlist = watchlist.includes(props.id);
 
   console.log("Watchlist: " + watchlist);
   console.log("Watchlist localstorage: " + localStorage.getItem("watchlist"));
@@ -26,7 +22,16 @@ const AnimeCard = (props: {
       >
         {props.title}
       </h1>
-      <p className="font-thin">Rating: {props.rating}</p>
+      {props.rating ? (
+        <p className="font-thin">Rating: {props.rating}</p>
+      ) : null}
+      {props.aired ? <p>{props.aired}</p> : null}
+      {props.broadcastTime ? (
+        <p>
+          <b>Scheduled: </b>
+          <i>{props.broadcastTime}</i>
+        </p>
+      ) : null}
       <div className="mt-2 flex w-full justify-around">
         <a
           href={props.url}
@@ -45,11 +50,11 @@ const AnimeCard = (props: {
         <div className="border-1"></div>
         <button
           onClick={() => {
-            if (!watchlist.includes(props.id)) {
+            if (!inWatchlist) {
               setWatchlist(props.id);
             }
           }}
-          className={`flex cursor-pointer items-center justify-center rounded p-2 transition-all hover:bg-slate-800 active:translate-y-0.5 ${watchlist.includes(props.id) ? "text-cyan-400" : ""} `}
+          className={`flex cursor-pointer items-center justify-center rounded p-2 transition-all hover:bg-slate-800 active:translate-y-0.5 ${inWatchlist ? "text-cyan-400" : ""} `}
         >
           <svg
             className="h-10 w-10 fill-current sm:h-6 sm:w-6 sm:pr-1"
@@ -58,7 +63,7 @@ const AnimeCard = (props: {
           >
             <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
           </svg>
-          {watchlist.includes(props.id) ? "In watchlist" : "Add to watchlist"}
+          {inWatchlist ? "In watchlist" : "Add to watchlist"}
         </button>
       </div>
     </div>
