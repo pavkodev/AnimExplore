@@ -26,9 +26,9 @@ function App() {
       <AnimeGroup url="/src/assets/data/upcoming.json" />
       <HeadingComponent heading={"Top Anime"} />
       <AnimeGroup url="/src/assets/data/top.json" />
-      {/* <HeadingComponent heading={"Explore Seasons"} />
-      <SeasonExplorer /> */}
-      <Watchlist />
+      <HeadingComponent heading={"Explore Seasons"} />
+      <SeasonExplorer />
+      {/* <Watchlist /> */}
     </WatchlistContext.Provider>
   );
 }

@@ -12,6 +12,7 @@ export type AnimeCardInfo = {
   rating?: string;
   aired?: string;
   broadcastTime?: string;
+  loading?: boolean;
 };
 
 //Hero anime card types

@@ -8,6 +8,28 @@ const AnimeCard = (props: AnimeCardInfo) => {
 
   console.log("Watchlist: " + watchlist);
   console.log("Watchlist localstorage: " + localStorage.getItem("watchlist"));
+
+  if (props.loading) {
+    return (
+      <div className="m-2 flex w-2xs flex-col items-center justify-between rounded border-2 border-slate-800 bg-slate-700 p-2 sm:w-xs">
+        {/* Image skeleton */}
+        <div className="h-80 w-65 animate-pulse rounded bg-slate-500" />
+        {/* Title skeleton */}
+        <div className="m-2 h-5 w-70 animate-pulse rounded bg-slate-500" />
+        <div className="m-2 h-5 w-30 animate-pulse rounded bg-slate-500" />
+        <div className="m-2 h-5 w-50 animate-pulse rounded bg-slate-500" />
+        {/* Aired skeleton */}
+        <div />
+        {/* Broadcast time skeleton */}
+        <div />
+        <div className="mt-2 flex w-75 animate-pulse justify-around">
+          {/* Button skeleton */}
+          <div className="h-10 w-30 animate-pulse rounded bg-slate-500" />
+          <div className="h-10 w-30 animate-pulse rounded bg-slate-500" />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="m-2 flex w-2xs flex-col items-center justify-between rounded border-2 border-slate-800 bg-slate-700 p-2 text-center text-white sm:w-xs">
       <img
@@ -28,7 +50,7 @@ const AnimeCard = (props: AnimeCardInfo) => {
       {props.aired ? <p>{props.aired}</p> : null}
       {props.broadcastTime ? (
         <p>
-          <b>Scheduled: </b>
+          <b>Airs: </b>
           <i>{props.broadcastTime}</i>
         </p>
       ) : null}
