@@ -7,6 +7,7 @@ const Watchlist = () => {
   const { watchlist } = useContext(WatchlistContext);
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [watchlistInfo, setWatchlistInfo] = useState<AnimeCardInfo[]>([]);
   const [currentAnimeInfo, setCurrentAnimeInfo] = useState<AnimeCardInfo[]>([]);
   const [upcomingAnimeInfo, setUpcomingAnimeInfo] = useState<AnimeCardInfo[]>(
@@ -18,15 +19,19 @@ const Watchlist = () => {
   useEffect(() => {
     setLoading(true);
     const watchlistCounter = watchlist.length;
+
+    const maxRetries = 5;
+    let retryCounter = 0;
+
     let fetchCounter = 0;
     let stagger = 0;
     watchlist.forEach((id) => {
       setTimeout(() => {
         const fetchData = async () => {
           fetchCounter++;
-          const url = `../src/assets/data/${id}.json`;
+          // const url = `../src/assets/data/${id}.json`;
           // Use one below once rate limit is refreshed
-          // const url = `https://api.jikan.moe/v4/anime/${id}/full`;
+          const url = `https://api.jikan.moe/v4/anime/${id}/full`;
 
           try {
             const response = await fetch(url);
@@ -73,36 +78,65 @@ const Watchlist = () => {
             }
             setWatchlistInfo((watchlistInfo) => [...watchlistInfo, dataObject]);
           } catch (error) {
+            let message = "Unknown error";
+            if (error instanceof Error) message = error.message;
+
+            if (retryCounter <= maxRetries) {
+              retryCounter++;
+              console.warn(error + "Retrying....");
+              fetchData();
+            }
             console.error(error);
+            setError(message);
+            console.error(message);
           } finally {
             if (fetchCounter >= watchlistCounter) setLoading(false);
           }
         };
         fetchData();
-      }, 500 * stagger);
+      }, 350 * stagger);
       stagger++;
     });
   }, [watchlist]);
   return (
     <>
-      <WatchlistSection
-        heading={"Currently Airing"}
-        wishlistItems={currentAnimeInfo}
-        loading={loading}
-      />
-      <div className="inline"></div>
-      <WatchlistSection
-        heading={"Upcoming"}
-        wishlistItems={upcomingAnimeInfo}
-        loading={loading}
-      />
-      <div className="inline"></div>
-      <WatchlistSection
-        heading={"Finished Airing"}
-        wishlistItems={pastAnimeInfo}
-        loading={loading}
-      />
-      <div className="inline"></div>
+      {error !== "" ? (
+        <div className="flex items-center justify-center">
+          <p className="m-4 text-white">{error}</p>
+        </div>
+      ) : watchlist.length < 1 ? (
+        <div className="flex items-center justify-center">
+          <p className="m-4 text-white">
+            Add something to your watchlist to get started!
+          </p>
+        </div>
+      ) : (
+        <>
+          {currentAnimeInfo.length > 0 ? (
+            <WatchlistSection
+              heading={"Currently Airing"}
+              wishlistItems={currentAnimeInfo}
+              loading={loading}
+            />
+          ) : null}
+
+          {upcomingAnimeInfo.length > 0 ? (
+            <WatchlistSection
+              heading={"Upcoming"}
+              wishlistItems={upcomingAnimeInfo}
+              loading={loading}
+            />
+          ) : null}
+
+          {pastAnimeInfo.length > 0 ? (
+            <WatchlistSection
+              heading={"Finished Airing"}
+              wishlistItems={pastAnimeInfo}
+              loading={loading}
+            />
+          ) : null}
+        </>
+      )}
     </>
   );
 };

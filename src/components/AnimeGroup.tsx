@@ -59,11 +59,12 @@ const AnimeGroup = (props: { url: string }) => {
       } catch (error) {
         let message = "Unknown error";
         if (error instanceof Error) message = error.message;
-        console.error(error);
         if (retryCounter <= maxRetries) {
-          fetchData();
           retryCounter++;
+          console.warn(error + "Retrying....");
+          fetchData();
         }
+        console.error(error);
         setError(message);
       } finally {
         setLoading(false);

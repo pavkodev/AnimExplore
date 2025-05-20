@@ -27,4 +27,5 @@ export type HeroInfo = {
   genres: string[];
   trailer: string;
   synopsis: string;
+  loading?: boolean;
 };

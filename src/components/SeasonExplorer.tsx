@@ -17,7 +17,7 @@ const SeasonExplorer = () => {
   return (
     <>
       <SeasonForm seasonGetter={getSeason} yearGetter={getYear} />
-      {season && year === -1 ? (
+      {season === "" && year === -1 ? (
         <p>Loading...</p>
       ) : (
         <AnimeGroup

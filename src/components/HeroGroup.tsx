@@ -113,7 +113,7 @@ const HeroGroup = (props: { url: string }) => {
     <div className="embla relative" ref={emblaRef}>
       <div className="embla__container">
         {data.map((datum, index) => (
-          <HeroAnimeCard key={index} {...datum} />
+          <HeroAnimeCard key={index} {...datum} loading={true} />
         ))}
       </div>
       <button
