@@ -14,8 +14,20 @@ const WatchlistSection = (props: {
         {props.wishlistItems.map((anime, index) => (
           <AnimeCard key={index} {...anime} />
         ))}
+
         {props.loading ? (
-          <AnimeCard id={0} url={""} image={""} title={""} loading={true} />
+          <div>
+            {Array.from({ length: 1 }).map((_, index) => (
+              <AnimeCard
+                key={index}
+                id={0}
+                url={""}
+                image={""}
+                title={""}
+                loading={true}
+              />
+            ))}
+          </div>
         ) : null}
       </div>
     </>

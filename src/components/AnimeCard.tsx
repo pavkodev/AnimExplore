@@ -6,9 +6,6 @@ const AnimeCard = (props: AnimeCardInfo) => {
   const { watchlist, setWatchlist } = useContext(WatchlistContext);
   const inWatchlist = watchlist.includes(props.id);
 
-  console.log("Watchlist: " + watchlist);
-  console.log("Watchlist localstorage: " + localStorage.getItem("watchlist"));
-
   if (props.loading) {
     return (
       <div className="m-2 flex w-2xs flex-col items-center justify-between rounded border-2 border-slate-800 bg-slate-700 p-2 sm:w-xs">

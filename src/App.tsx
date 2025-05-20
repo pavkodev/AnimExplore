@@ -16,7 +16,7 @@ function App() {
 
   return (
     <WatchlistContext.Provider value={value}>
-      <HeaderComponent />
+      {/* <HeaderComponent />
       <FilmTvToggle />
       <HeadingComponent heading={"Genre Information"} />
       <GenreInfo />
@@ -27,8 +27,8 @@ function App() {
       <HeadingComponent heading={"Top Anime"} />
       <AnimeGroup url="/src/assets/data/top.json" />
       <HeadingComponent heading={"Explore Seasons"} />
-      <SeasonExplorer />
-      {/* <Watchlist /> */}
+      <SeasonExplorer /> */}
+      <Watchlist />
     </WatchlistContext.Provider>
   );
 }
