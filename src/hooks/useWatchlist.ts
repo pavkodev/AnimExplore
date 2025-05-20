@@ -12,13 +12,8 @@ const useWatchlist = (): [number[], (id: number) => void] => {
 
   const updateWatchlist = (id: number) => {
     const updated = [...watchlist, id];
-    console.log("Updated:" + updated);
     setWatchlist(updated);
-
-    console.log(JSON.stringify(updated));
-    console.log("Watchlist: " + watchlist);
     localStorage.setItem("watchlist", JSON.stringify(updated));
-    console.log("Watchlist localstorage: " + localStorage.getItem("watchlist"));
   };
 
   return [watchlist, updateWatchlist];
