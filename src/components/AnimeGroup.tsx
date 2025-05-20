@@ -5,16 +5,20 @@ import { AnimeCardInfo } from "../types/types";
 const AnimeGroup = (props: { url: string }) => {
   const [data, setData] = useState<AnimeCardInfo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
+    setLoading(true);
     setData([]);
+    const maxRetries = 5;
+    let retryCounter = 0;
     const fetchData = async () => {
       const url = props.url;
 
       try {
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error("ERROR FETCHING URL");
+          throw new Error("Error fetching data: " + response.statusText);
         }
         const json = await response.json();
         const jsonNoDuplicates = json.data.filter(
@@ -52,18 +56,37 @@ const AnimeGroup = (props: { url: string }) => {
             ]);
           },
         );
-        setLoading(false);
       } catch (error) {
+        let message = "Unknown error";
+        if (error instanceof Error) message = error.message;
         console.error(error);
+        if (retryCounter <= maxRetries) {
+          fetchData();
+          retryCounter++;
+        }
+        setError(message);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, [props.url]);
 
   return loading ? (
-    <p className="p-4 text-white">Loading....</p>
-  ) : !data ? (
-    <p className="p-4 text-white">Cannot reach database.</p>
+    <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
+      {Array.from({ length: 10 }).map((_, index) => (
+        <AnimeCard
+          key={index}
+          id={0}
+          url={""}
+          image={""}
+          title={""}
+          loading={true}
+        />
+      ))}
+    </div>
+  ) : error !== "" ? (
+    <p className="p-4 text-red-400">Cannot reach database ({error}).</p>
   ) : (
     <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
       {data.map((datum, index) => (

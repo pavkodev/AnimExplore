@@ -5,6 +5,7 @@ import HeadingComponent from "./HeadingComponent";
 const WatchlistSection = (props: {
   heading: string;
   wishlistItems: AnimeCardInfo[];
+  loading: boolean;
 }) => {
   return (
     <>
@@ -13,6 +14,9 @@ const WatchlistSection = (props: {
         {props.wishlistItems.map((anime, index) => (
           <AnimeCard key={index} {...anime} />
         ))}
+        {props.loading ? (
+          <AnimeCard id={0} url={""} image={""} title={""} loading={true} />
+        ) : null}
       </div>
     </>
   );
