@@ -61,7 +61,7 @@ const AnimeGroup = (props: { url: string }) => {
         if (error instanceof Error) message = error.message;
         if (retryCounter <= maxRetries) {
           retryCounter++;
-          console.warn(error + "Retrying....");
+          console.warn("Anime cards error: " + error + " Retrying....");
           fetchData();
         }
         console.error(error);

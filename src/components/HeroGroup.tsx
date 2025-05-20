@@ -7,6 +7,7 @@ import Autoplay from "embla-carousel-autoplay";
 const HeroGroup = (props: { url: string }) => {
   const [data, setData] = useState<HeroInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState("");
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ stopOnInteraction: false }),
@@ -21,7 +22,10 @@ const HeroGroup = (props: { url: string }) => {
   }, [emblaApi]);
 
   useEffect(() => {
+    setLoading(true);
     setData([]);
+    const maxRetries = 5;
+    let retryCounter = 0;
     const fetchData = async () => {
       const url = props.url;
 
@@ -99,21 +103,50 @@ const HeroGroup = (props: { url: string }) => {
         );
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        let message = "Unknown error";
+        if (error instanceof Error) message = error.message;
+        if (retryCounter <= maxRetries) {
+          retryCounter++;
+          console.warn("Hero cards error: " + error + " Retrying...");
+          fetchData();
+        }
+        console.error(message);
+        setError(message);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, [props.url]);
 
-  if (loading) {
-    return <p className="text-white">Loading...</p>;
-  }
-
-  return (
+  return loading ? (
+    <div className="embla relative">
+      <div className="embla__container">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <HeroAnimeCard
+            key={index}
+            id={0}
+            url={""}
+            image={""}
+            title={""}
+            altTitle={""}
+            studios={[]}
+            type={""}
+            genres={[]}
+            trailer={""}
+            synopsis={""}
+            loading={true}
+          />
+        ))}
+      </div>
+    </div>
+  ) : error !== "" ? (
+    <p className="m-4 text-red-400">Cannot reach database ({error})</p>
+  ) : (
     <div className="embla relative" ref={emblaRef}>
       <div className="embla__container">
         {data.map((datum, index) => (
-          <HeroAnimeCard key={index} {...datum} loading={true} />
+          <HeroAnimeCard key={index} {...datum} />
         ))}
       </div>
       <button
