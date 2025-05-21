@@ -88,7 +88,7 @@ const AnimeGroup = (props: { url: string }) => {
     </div>
   ) : error !== "" ? (
     <p className="p-4 text-red-400">Cannot reach database ({error}).</p>
-  ) : (
+  ) : data.length > 0 ? (
     <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
       {data.map((datum, index) => (
         <AnimeCard
@@ -102,6 +102,8 @@ const AnimeGroup = (props: { url: string }) => {
         />
       ))}
     </div>
+  ) : (
+    <p className="p-4 text-orange-400">No data yet. Check back later!</p>
   );
 };
 

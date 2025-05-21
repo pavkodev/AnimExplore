@@ -9,6 +9,7 @@ import SeasonExplorer from "./components/SeasonExplorer";
 import useWatchlist from "./hooks/useWatchlist";
 import { WatchlistContext } from "./contexts/WatchlistContext";
 import Watchlist from "./components/Watchlist";
+import CollapsibleSection from "./components/CollapsibleSection";
 
 function App() {
   const [watchlist, setWatchlist] = useWatchlist();
@@ -20,14 +21,29 @@ function App() {
       <FilmTvToggle />
       <HeadingComponent heading={"Genre Information"} />
       <GenreInfo />
-      <HeadingComponent heading={"New Season Releases"} />
-      <HeroGroup url={"/src/assets/data/now.json"} />
-      <HeadingComponent heading={"Upcoming Anime"} />
-      <AnimeGroup url="/src/assets/data/upcoming.json" />
-      <HeadingComponent heading={"Top Anime"} />
-      <AnimeGroup url="/src/assets/data/top.json" />
-      <HeadingComponent heading={"Explore Seasons"} />
-      <SeasonExplorer />
+
+      <CollapsibleSection
+        heading={"New Season Releases"}
+        content={<HeroGroup url={"/src/assets/data/now.json"} />}
+        openByDefault={true}
+      />
+
+      <CollapsibleSection
+        heading={"Upcoming Anime"}
+        content={<AnimeGroup url="/src/assets/data/upcoming.json" />}
+        openByDefault={true}
+      />
+
+      <CollapsibleSection
+        heading={"Top Anime"}
+        content={<AnimeGroup url="/src/assets/data/top.json" />}
+        openByDefault={true}
+      />
+      <CollapsibleSection
+        heading={"Explore Seasons"}
+        content={<SeasonExplorer />}
+        openByDefault={true}
+      />
       {/* <Watchlist /> */}
     </WatchlistContext.Provider>
   );

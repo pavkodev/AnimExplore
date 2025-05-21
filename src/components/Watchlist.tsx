@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { WatchlistContext } from "../contexts/WatchlistContext";
 import { AnimeCardInfo } from "../types/types";
 import WatchlistSection from "./WatchlistSection";
+import CollapsibleSection from "./CollapsibleSection";
 
 const Watchlist = () => {
   const { watchlist } = useContext(WatchlistContext);
@@ -29,16 +30,16 @@ const Watchlist = () => {
       setTimeout(() => {
         const fetchData = async () => {
           fetchCounter++;
-          // const url = `../src/assets/data/${id}.json`;
+          const url = `../src/assets/data/${id}.json`;
           // Use one below once rate limit is refreshed
-          const url = `https://api.jikan.moe/v4/anime/${id}/full`;
+          // const url = `https://api.jikan.moe/v4/anime/${id}/full`;
 
           try {
             const response = await fetch(url);
 
             if (!response.ok) {
               throw new Error(
-                "Error fetching data for wishlist: " + response.status,
+                "Error fetching data for wishlist: " + response.statusText,
               );
             }
 
@@ -102,7 +103,9 @@ const Watchlist = () => {
     <>
       {error !== "" ? (
         <div className="flex items-center justify-center">
-          <p className="m-4 text-white">{error}</p>
+          <p className="m-4 text-white">
+            {error}. Please come back later and try again.
+          </p>
         </div>
       ) : watchlist.length < 1 ? (
         <div className="flex items-center justify-center">
@@ -113,26 +116,41 @@ const Watchlist = () => {
       ) : (
         <>
           {currentAnimeInfo.length > 0 ? (
-            <WatchlistSection
+            <CollapsibleSection
               heading={"Currently Airing"}
-              wishlistItems={currentAnimeInfo}
-              loading={loading}
+              content={
+                <WatchlistSection
+                  wishlistItems={currentAnimeInfo}
+                  loading={loading}
+                />
+              }
+              openByDefault={true}
             />
           ) : null}
 
           {upcomingAnimeInfo.length > 0 ? (
-            <WatchlistSection
+            <CollapsibleSection
               heading={"Upcoming"}
-              wishlistItems={upcomingAnimeInfo}
-              loading={loading}
+              content={
+                <WatchlistSection
+                  wishlistItems={upcomingAnimeInfo}
+                  loading={loading}
+                />
+              }
+              openByDefault={true}
             />
           ) : null}
 
           {pastAnimeInfo.length > 0 ? (
-            <WatchlistSection
+            <CollapsibleSection
               heading={"Finished Airing"}
-              wishlistItems={pastAnimeInfo}
-              loading={loading}
+              content={
+                <WatchlistSection
+                  wishlistItems={pastAnimeInfo}
+                  loading={loading}
+                />
+              }
+              openByDefault={true}
             />
           ) : null}
         </>
