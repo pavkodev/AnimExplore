@@ -18,7 +18,7 @@ function App() {
   return (
     <WatchlistContext.Provider value={value}>
       <HeaderComponent />
-      <FilmTvToggle />
+      {/* <FilmTvToggle /> */}
       <HeadingComponent heading={"Genre Information"} />
       <GenreInfo />
 
