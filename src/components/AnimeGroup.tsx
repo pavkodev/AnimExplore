@@ -8,8 +8,6 @@ const AnimeGroup = (props: { url: string }) => {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    setLoading(true);
-    setData([]);
     const maxRetries = 5;
     let retryCounter = 0;
     const fetchData = async () => {
@@ -71,6 +69,11 @@ const AnimeGroup = (props: { url: string }) => {
       }
     };
     fetchData();
+
+    return () => {
+      setLoading(true);
+      setData([]);
+    };
   }, [props.url]);
 
   return loading ? (
