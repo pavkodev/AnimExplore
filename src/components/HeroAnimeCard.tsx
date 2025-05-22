@@ -32,7 +32,9 @@ const HeroAnimeCard = (props: HeroInfo) => {
           <button
             onClick={() => {
               if (!inWatchlist) {
-                setWatchlist(props.id);
+                setWatchlist(props.id, "add");
+              } else {
+                setWatchlist(props.id, "remove");
               }
             }}
             className={`absolute top-0 left-0 m-2 flex cursor-pointer items-center justify-center rounded bg-slate-800/70 p-2 transition-all hover:bg-slate-800 active:translate-y-0.5 ${inWatchlist ? "text-cyan-400" : ""}`}

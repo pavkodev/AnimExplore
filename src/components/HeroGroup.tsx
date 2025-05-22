@@ -22,8 +22,6 @@ const HeroGroup = (props: { url: string }) => {
   }, [emblaApi]);
 
   useEffect(() => {
-    setLoading(true);
-    setData([]);
     const maxRetries = 5;
     let retryCounter = 0;
     const fetchData = async () => {
@@ -117,6 +115,10 @@ const HeroGroup = (props: { url: string }) => {
       }
     };
     fetchData();
+    return () => {
+      setLoading(true);
+      setData([]);
+    };
   }, [props.url]);
 
   return loading ? (

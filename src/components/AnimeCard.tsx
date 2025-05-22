@@ -70,7 +70,9 @@ const AnimeCard = (props: AnimeCardInfo) => {
         <button
           onClick={() => {
             if (!inWatchlist) {
-              setWatchlist(props.id);
+              setWatchlist(props.id, "add");
+            } else {
+              setWatchlist(props.id, "remove");
             }
           }}
           className={`flex cursor-pointer items-center justify-center rounded p-2 transition-all hover:bg-slate-800 active:translate-y-0.5 ${inWatchlist ? "text-cyan-400" : ""} `}

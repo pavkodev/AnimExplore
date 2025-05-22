@@ -9,7 +9,6 @@ const Watchlist = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [watchlistInfo, setWatchlistInfo] = useState<AnimeCardInfo[]>([]);
   const [currentAnimeInfo, setCurrentAnimeInfo] = useState<AnimeCardInfo[]>([]);
   const [upcomingAnimeInfo, setUpcomingAnimeInfo] = useState<AnimeCardInfo[]>(
     [],
@@ -77,7 +76,6 @@ const Watchlist = () => {
                 ]);
                 break;
             }
-            setWatchlistInfo((watchlistInfo) => [...watchlistInfo, dataObject]);
           } catch (error) {
             let message = "Unknown error";
             if (error instanceof Error) message = error.message;
@@ -98,6 +96,11 @@ const Watchlist = () => {
       }, 350 * stagger);
       stagger++;
     });
+    return () => {
+      setCurrentAnimeInfo([]);
+      setUpcomingAnimeInfo([]);
+      setPastAnimeInfo([]);
+    };
   }, [watchlist]);
   return (
     <>
