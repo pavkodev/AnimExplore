@@ -118,7 +118,7 @@ const AnimeGroup = (props: { url: string; scrollable: boolean }) => {
       ))}
     </div>
   ) : (
-    <p className="p-4 text-orange-400">No data yet. Check back later!</p>
+    <p className="p-4 font-semibold text-white">No results found 💔</p>
   );
 };
 

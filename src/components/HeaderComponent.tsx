@@ -1,13 +1,25 @@
 import { useContext } from "react";
 import { WatchlistContext } from "../contexts/WatchlistContext";
 import { Link } from "react-router";
-import { useSearchParams } from "react-router";
+import { useNavigate } from "react-router";
 
 const HeaderComponent = () => {
   const { watchlist } = useContext(WatchlistContext);
-  const [, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   return (
-    <header className="flex items-center justify-center border-b-2 border-orange-400 bg-inherit text-white">
+    <header className="flex flex-col items-center justify-center border-b-2 border-orange-400 bg-inherit text-white sm:flex-row sm:justify-between">
+      <Link to="/">
+        <img
+          className="m-4 hidden h-10 sm:block"
+          src="src\assets\images\logo-textonly.png"
+          alt=""
+        />
+        <img
+          className="h-40 sm:hidden"
+          src="src\assets\images\logo.png"
+          alt=""
+        />
+      </Link>
       <div className="flex flex-row items-center justify-center p-2">
         <form
           className="flex min-w-fit rounded bg-slate-800 p-2"
@@ -18,9 +30,12 @@ const HeaderComponent = () => {
               "in-search",
             ) as HTMLInputElement;
             if (searchBox) {
-              setSearchParams(
-                searchBox.value ? { query: searchBox.value } : {},
-              );
+              console.log(searchBox.value.length);
+              if (searchBox.value.length < 1) {
+                navigate("/");
+                return;
+              }
+              navigate(`/search?query=${searchBox.value}`);
             }
           }}
         >
@@ -30,9 +45,12 @@ const HeaderComponent = () => {
             placeholder="Search titles..."
             id="in-search"
           />
-          <button type="submit" className="pl-2">
+          <button
+            type="submit"
+            className="cursor-pointer fill-white pl-2 transition-all hover:fill-cyan-400 active:scale-120 active:-rotate-20"
+          >
             <svg
-              className="h-5 w-5 fill-white"
+              className="h-5 w-5 fill-inherit"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 -960 960 960"
             >
@@ -56,8 +74,8 @@ const HeaderComponent = () => {
             <span className="sr-only">
               Watchlist counter ({watchlist.length})
             </span>
-            <div className="absolute -end-2 -top-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-gray-900 bg-orange-400 text-xs font-bold text-white transition-all group-hover:bg-cyan-400">
-              {watchlist.length}
+            <div className="absolute -end-2 -top-2 inline-flex h-fit min-h-6 w-fit min-w-6 items-center justify-center rounded-full border-2 border-gray-900 bg-orange-400 text-xs font-bold text-white transition-all group-hover:bg-cyan-400">
+              {watchlist.length < 100 ? watchlist.length : ">.<"}
             </div>
             <span className="hidden sm:inline">Watchlist</span>
           </button>
