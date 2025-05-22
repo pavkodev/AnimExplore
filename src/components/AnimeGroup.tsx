@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AnimeCard from "./AnimeCard";
 import { AnimeCardInfo } from "../types/types";
 
-const AnimeGroup = (props: { url: string }) => {
+const AnimeGroup = (props: { url: string; scrollable: boolean }) => {
   const [data, setData] = useState<AnimeCardInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
@@ -77,7 +77,13 @@ const AnimeGroup = (props: { url: string }) => {
   }, [props.url]);
 
   return loading ? (
-    <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
+    <div
+      className={
+        props.scrollable
+          ? "m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800"
+          : "grid grid-flow-row grid-cols-1 justify-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      }
+    >
       {Array.from({ length: 10 }).map((_, index) => (
         <AnimeCard
           key={index}
@@ -92,7 +98,13 @@ const AnimeGroup = (props: { url: string }) => {
   ) : error !== "" ? (
     <p className="p-4 text-red-400">Cannot reach database ({error}).</p>
   ) : data.length > 0 ? (
-    <div className="m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800">
+    <div
+      className={
+        props.scrollable
+          ? "m-2 grid grid-flow-col grid-rows-1 gap-3 overflow-scroll overflow-y-hidden [&::-webkit-scrollbar]:m-2 [&::-webkit-scrollbar-thumb]:bg-gray-400 [&::-webkit-scrollbar-track]:bg-slate-800"
+          : "grid grid-flow-row grid-cols-1 justify-items-center gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+      }
+    >
       {data.map((datum, index) => (
         <AnimeCard
           key={index}

@@ -1,15 +1,10 @@
 import "./App.css";
-import AnimeGroup from "./components/AnimeGroup";
-import FilmTvToggle from "./components/FilmTvToggle";
-import GenreInfo from "./components/GenreInfo";
-import HeaderComponent from "./components/HeaderComponent";
-import HeadingComponent from "./components/HeadingComponent";
-import HeroGroup from "./components/HeroGroup";
-import SeasonExplorer from "./components/SeasonExplorer";
 import useWatchlist from "./hooks/useWatchlist";
 import { WatchlistContext } from "./contexts/WatchlistContext";
-import Watchlist from "./components/Watchlist";
-import CollapsibleSection from "./components/CollapsibleSection";
+import { BrowserRouter, Route, Routes } from "react-router";
+import HomePage from "./pages/HomePage";
+import WatchlistPage from "./pages/WatchlistPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const [watchlist, setWatchlist] = useWatchlist();
@@ -17,34 +12,13 @@ function App() {
 
   return (
     <WatchlistContext.Provider value={value}>
-      <HeaderComponent />
-      {/* <FilmTvToggle /> */}
-      <HeadingComponent heading={"Genre Information"} />
-      <GenreInfo />
-
-      <CollapsibleSection
-        heading={"New Season Releases"}
-        content={<HeroGroup url={"/src/assets/data/now.json"} />}
-        openByDefault={true}
-      />
-
-      <CollapsibleSection
-        heading={"Upcoming Anime"}
-        content={<AnimeGroup url="/src/assets/data/upcoming.json" />}
-        openByDefault={true}
-      />
-
-      <CollapsibleSection
-        heading={"Top Anime"}
-        content={<AnimeGroup url="/src/assets/data/top.json" />}
-        openByDefault={true}
-      />
-      <CollapsibleSection
-        heading={"Explore Seasons"}
-        content={<SeasonExplorer />}
-        openByDefault={true}
-      />
-      {/* <Watchlist /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/search" element={<SearchPage />}></Route>
+          <Route path="/watchlist" element={<WatchlistPage />}></Route>
+        </Routes>
+      </BrowserRouter>
     </WatchlistContext.Provider>
   );
 }

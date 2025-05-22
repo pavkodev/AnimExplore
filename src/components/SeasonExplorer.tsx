@@ -22,6 +22,7 @@ const SeasonExplorer = () => {
       ) : (
         <AnimeGroup
           url={`https://api.jikan.moe/v4/seasons/${year}/${season}`}
+          scrollable={true}
         />
       )}
       ;
