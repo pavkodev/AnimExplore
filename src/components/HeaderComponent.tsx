@@ -5,36 +5,33 @@ const HeaderComponent = () => {
   const { watchlist } = useContext(WatchlistContext);
   return (
     <header className="flex items-center justify-center border-b-2 border-orange-400 bg-inherit text-white">
-      {/* CODE BELOW: BUTTONS SAME LENGTH AS SEARCH BAR
-      <div className="grid grid-cols-2 grid-rows-2">
-        <input
-          className="bg-slate-800 m-2 p-2 col-span-2 rounded"
-          type="text"
-          name="in-search"
-          placeholder="Search titles..."
-          id="in-search"
-        />
-        <div className="rounded flex mb-2 col-span-2 justify-between mt-1">
-          <button className="w-max mx-1 flex-1 hover:bg-slate-900 bg-orange-500 rounded">
-            TV Shows
-          </button>
-          <div className="border-1"></div>
-          <button className="w-max mx-1 flex-1 hover:bg-slate-900 bg-orange-500 rounded">
-            Film
-          </button>
-        </div>
-      </div> */}
       <div className="flex flex-row items-center justify-center p-2">
-        <input
-          className="min-w-fit rounded bg-slate-800 p-2"
-          type="text"
-          name="in-search"
-          placeholder="Search titles..."
-          id="in-search"
-        />
+        <form
+          className="flex min-w-fit rounded bg-slate-800 p-2"
+          onSubmit={(event) => {
+            event.preventDefault();
+            alert("submitted!");
+          }}
+        >
+          <input
+            type="text"
+            name="in-search"
+            placeholder="Search titles..."
+            id="in-search"
+          />
+          <button type="submit" className="pl-2">
+            <svg
+              className="h-5 w-5 fill-white"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 -960 960 960"
+            >
+              <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+            </svg>
+          </button>
+        </form>
         <button
           type="button"
-          className="group relative m-2 inline-flex cursor-pointer items-center rounded-lg bg-slate-700 p-2 text-center text-sm font-medium text-white transition-all hover:text-cyan-400 active:translate-y-0.5"
+          className="group relative m-2 inline-flex cursor-pointer items-center rounded bg-slate-700 p-2 text-center text-sm font-medium text-white transition-all hover:text-cyan-400 active:translate-y-0.5"
         >
           <svg
             className="h-6 w-6 fill-current sm:pr-1"
