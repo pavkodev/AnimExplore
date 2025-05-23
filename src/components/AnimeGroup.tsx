@@ -7,7 +7,7 @@ const AnimeGroup = (props: { url: string; scrollable: boolean }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
   //Code taken from https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
   useEffect(() => {
     const maxRetries = 5;

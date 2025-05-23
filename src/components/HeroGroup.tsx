@@ -6,7 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const HeroGroup = (props: { url: string }) => {
   //Code taken from https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
   const [data, setData] = useState<HeroInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

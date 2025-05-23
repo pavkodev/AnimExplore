@@ -7,7 +7,6 @@ import CollapsibleSection from "./CollapsibleSection";
 const Watchlist = () => {
   const { watchlist } = useContext(WatchlistContext);
   //Code taken from https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentAnimeInfo, setCurrentAnimeInfo] = useState<AnimeCardInfo[]>([]);
@@ -93,7 +92,7 @@ const Watchlist = () => {
           }
         };
         fetchData();
-      }, 500 * stagger);
+      }, 750 * stagger);
       stagger++;
     });
     return () => {
