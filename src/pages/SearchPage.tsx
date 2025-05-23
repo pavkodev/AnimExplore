@@ -10,7 +10,7 @@ const SearchPage = () => {
   return (
     <>
       <HeaderComponent />
-      <HeadingComponent heading="Search Results" />
+      <HeadingComponent heading={`Search Results for "${query}"`} />
       {query.length > 0 ? (
         <AnimeGroup
           url={`https://api.jikan.moe/v4/anime?q=${query}`}
