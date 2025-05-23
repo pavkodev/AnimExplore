@@ -8,7 +8,7 @@ const HeaderComponent = () => {
   const navigate = useNavigate();
   return (
     <header className="flex flex-col items-center justify-center border-b-2 border-orange-400 bg-inherit text-white sm:flex-row sm:justify-between">
-      <Link to="/">
+      <Link to="AnimExplore/">
         <img
           className="m-4 hidden h-10 sm:block"
           src="src\assets\images\logo-textonly.png"
@@ -32,10 +32,10 @@ const HeaderComponent = () => {
             if (searchBox) {
               console.log(searchBox.value.length);
               if (searchBox.value.length < 1) {
-                navigate("/");
+                navigate("AnimExplore/");
                 return;
               }
-              navigate(`/search?query=${searchBox.value}`);
+              navigate(`AnimExplore/search?query=${searchBox.value}`);
             }
           }}
         >
@@ -58,7 +58,7 @@ const HeaderComponent = () => {
             </svg>
           </button>
         </form>
-        <Link to="/watchlist">
+        <Link to="AnimExplore/watchlist">
           <button
             type="button"
             className="group relative m-2 inline-flex cursor-pointer items-center rounded bg-slate-700 p-2 text-center text-sm font-medium text-white transition-all hover:text-cyan-400 active:translate-y-0.5"
