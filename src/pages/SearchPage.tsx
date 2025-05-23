@@ -13,7 +13,7 @@ const SearchPage = () => {
       <HeadingComponent heading="Search Results" />
       {query.length > 0 ? (
         <AnimeGroup
-          url={`https://api.jikan.moe/v4/anime?q=${query}&order_by=popularity`}
+          url={`https://api.jikan.moe/v4/anime?q=${query}`}
           scrollable={false}
         />
       ) : (

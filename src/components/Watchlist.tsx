@@ -17,6 +17,10 @@ const Watchlist = () => {
 
   //This will run every time a new anime is added. Make it run only once and if new anime is added, run it for that anime only
   useEffect(() => {
+    setCurrentAnimeInfo([]);
+    setUpcomingAnimeInfo([]);
+    setPastAnimeInfo([]);
+
     const watchlistCounter = watchlist.length;
 
     const maxRetries = 5;
@@ -96,12 +100,9 @@ const Watchlist = () => {
       stagger++;
     });
     return () => {
-      setCurrentAnimeInfo([]);
-      setUpcomingAnimeInfo([]);
-      setPastAnimeInfo([]);
       setLoading(true);
     };
-  }, [watchlist]);
+  }, []);
   return (
     <>
       {error !== "" ? (
