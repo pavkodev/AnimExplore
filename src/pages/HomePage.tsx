@@ -10,20 +10,22 @@ const HomePage = () => {
   return (
     <>
       <HeaderComponent />
-      {/* <FilmTvToggle /> */}
       <HeadingComponent heading={"Genre Information"} />
       <GenreInfo />
 
       <CollapsibleSection
         heading={"New Season Releases"}
-        content={<HeroGroup url={"/src/assets/data/now.json"} />}
+        content={<HeroGroup url={"https://api.jikan.moe/v4/seasons/now"} />}
         openByDefault={true}
       />
 
       <CollapsibleSection
         heading={"Upcoming Anime"}
         content={
-          <AnimeGroup url="/src/assets/data/upcoming.json" scrollable={true} />
+          <AnimeGroup
+            url="https://api.jikan.moe/v4/seasons/upcoming"
+            scrollable={true}
+          />
         }
         openByDefault={true}
       />
@@ -31,7 +33,10 @@ const HomePage = () => {
       <CollapsibleSection
         heading={"Top Anime"}
         content={
-          <AnimeGroup url="/src/assets/data/top.json" scrollable={true} />
+          <AnimeGroup
+            url="https://api.jikan.moe/v4/top/anime"
+            scrollable={true}
+          />
         }
         openByDefault={true}
       />
@@ -40,7 +45,6 @@ const HomePage = () => {
         content={<SeasonExplorer />}
         openByDefault={true}
       />
-      {/* <Watchlist /> */}
     </>
   );
 };

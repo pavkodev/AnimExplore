@@ -6,11 +6,14 @@ const AnimeGroup = (props: { url: string; scrollable: boolean }) => {
   const [data, setData] = useState<AnimeCardInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
+  //Code taken from https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
   useEffect(() => {
     const maxRetries = 5;
     let retryCounter = 0;
     const fetchData = async () => {
+      await delay(Math.random() * 10000);
       const url = props.url;
 
       try {

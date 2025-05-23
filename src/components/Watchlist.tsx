@@ -6,7 +6,8 @@ import CollapsibleSection from "./CollapsibleSection";
 
 const Watchlist = () => {
   const { watchlist } = useContext(WatchlistContext);
-
+  //Code taken from https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentAnimeInfo, setCurrentAnimeInfo] = useState<AnimeCardInfo[]>([]);
@@ -28,9 +29,9 @@ const Watchlist = () => {
       setTimeout(() => {
         const fetchData = async () => {
           fetchCounter++;
-          const url = `../src/assets/data/${id}.json`;
+          // const url = `../src/assets/data/${id}.json`;
           // Use one below once rate limit is refreshed
-          // const url = `https://api.jikan.moe/v4/anime/${id}/full`;
+          const url = `https://api.jikan.moe/v4/anime/${id}/full`;
 
           try {
             const response = await fetch(url);
@@ -92,7 +93,7 @@ const Watchlist = () => {
           }
         };
         fetchData();
-      }, 350 * stagger);
+      }, 500 * stagger);
       stagger++;
     });
     return () => {

@@ -5,6 +5,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 const HeroGroup = (props: { url: string }) => {
+  //Code taken from https://stackoverflow.com/questions/14226803/wait-5-seconds-before-executing-next-line
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
   const [data, setData] = useState<HeroInfo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("");
@@ -25,14 +28,15 @@ const HeroGroup = (props: { url: string }) => {
     const maxRetries = 5;
     let retryCounter = 0;
     const fetchData = async () => {
+      await delay(Math.random() * 500);
       const url = props.url;
 
       try {
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error(
-            "Error fetching data in HeroGroup component: Status " +
-              response.status,
+            "Error fetching data in HeroGroup component: " +
+              response.statusText,
           );
         }
         const json = await response.json();
@@ -108,7 +112,7 @@ const HeroGroup = (props: { url: string }) => {
           console.warn("Hero cards error: " + error + " Retrying...");
           fetchData();
         }
-        console.error(message);
+        console.error("Hero cards error: " + message);
         setError(message);
       } finally {
         setLoading(false);
