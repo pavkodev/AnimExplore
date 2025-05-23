@@ -15,11 +15,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="AnimExplore/" element={<HomePage />}></Route>
-          <Route path="AnimExplore/search" element={<SearchPage />}></Route>
-          <Route
-            path="AnimExplore/watchlist"
-            element={<WatchlistPage />}
-          ></Route>
+          <Route path="/search" element={<SearchPage />}></Route>
+          <Route path="/watchlist" element={<WatchlistPage />}></Route>
         </Routes>
       </BrowserRouter>
     </WatchlistContext.Provider>
