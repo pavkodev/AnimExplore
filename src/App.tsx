@@ -1,7 +1,7 @@
 import "./App.css";
 import useWatchlist from "./hooks/useWatchlist";
 import { WatchlistContext } from "./contexts/WatchlistContext";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { HashRouter, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import WatchlistPage from "./pages/WatchlistPage";
 import SearchPage from "./pages/SearchPage";
@@ -12,13 +12,13 @@ function App() {
 
   return (
     <WatchlistContext.Provider value={value}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
-          <Route path="AnimExplore/" element={<HomePage />}></Route>
+          <Route path="/" element={<HomePage />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
           <Route path="/watchlist" element={<WatchlistPage />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </WatchlistContext.Provider>
   );
 }

@@ -8,7 +8,7 @@ const HeaderComponent = () => {
   const navigate = useNavigate();
   return (
     <header className="flex flex-col items-center justify-center border-b-2 border-orange-400 bg-inherit text-white sm:flex-row sm:justify-between">
-      <Link to="/AnimExplore/">
+      <Link to="/">
         <img
           className="m-4 hidden h-10 sm:block"
           src="/AnimExplore/images/logo-textonly.png"
@@ -32,7 +32,7 @@ const HeaderComponent = () => {
             if (searchBox) {
               console.log(searchBox.value.length);
               if (searchBox.value.length < 1) {
-                navigate("/AnimExplore/");
+                navigate("/");
                 return;
               }
               navigate(`/search?query=${searchBox.value}`);
