@@ -96,7 +96,7 @@ const Watchlist = () => {
           }
         };
         fetchData();
-      }, 750 * stagger);
+      }, 850 * stagger);
       stagger++;
     });
     return () => {
