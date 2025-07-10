@@ -26,8 +26,8 @@ const HeroAnimeCard = (props: HeroInfo) => {
         <div className="embla__slide relative m-2 flex w-[80vw] snap-center flex-col items-center justify-center rounded border-2 border-orange-600 bg-gray-950 pb-4 text-white lg:w-max lg:flex-row lg:pr-4 lg:pb-0">
           <img
             src={props.image}
-            alt="placeholder"
-            className="self-stretch rounded mask-b-from-0 lg:mask-r-from-0 lg:mask-b-from-100%"
+            alt={`${props.altTitle} cover image`}
+            className="h-full self-stretch rounded mask-b-from-0 lg:max-w-[67%] lg:mask-r-from-0 lg:mask-b-from-100%"
           />
           <button
             onClick={() => {
